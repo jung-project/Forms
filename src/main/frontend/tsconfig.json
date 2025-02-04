@@ -21,6 +21,7 @@
     "src/setupProxy.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "./tsconfig.paths.json"
   ]
 }
