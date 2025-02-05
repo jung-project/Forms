@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "target": "ES6",
     "lib": ["dom", "es6"],
@@ -9,20 +10,16 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "strict": true,
-    "resolveJsonModule": true,
-    "baseUrl": "./",
-    "paths": {
-      "*": ["node_modules/*"]
-    }
+    "resolveJsonModule": true
   },
   "include": [
     "src",
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/setupProxy.ts"
+    "src/setupProxy.ts",
+    "craco.config.js"
   ],
   "exclude": [
-    "node_modules",
-    "./tsconfig.paths.json"
+    "node_modules"
   ]
 }

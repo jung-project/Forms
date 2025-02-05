@@ -3,7 +3,7 @@ import M_TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
 import Button from '@mui/material/Button';
 
-import SelectItemProp from '../interfaces/SelectItemProp'
+import SelectItemProp from '@component/interfaces/SelectItemProp'
 import DeleteIcon from '@mui/icons-material/DeleteForever';
 
 export default function RadioOption(props: {option: SelectItemProp, delete: any, change: any}){

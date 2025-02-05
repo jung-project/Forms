@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import TextField from './component/froms/TextField'
-import SelectItem from './component/froms/SelectItem'
+import TextField from './component/froms/edit/TextField'
+import SelectItem from './component/froms/edit/SelectItem'
 import Container from '@mui/material/Container';
 
 export default function App(){

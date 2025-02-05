@@ -28,7 +28,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "craco eject"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +49,7 @@
     ]
   },
   "devDependencies": {
-    "@types/http-proxy-middleware": "^1.0.0"
+    "@types/http-proxy-middleware": "^1.0.0",
+    "craco-alias": "^3.0.1"
   }
 }

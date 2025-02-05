@@ -6,10 +6,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Switch from '@mui/material/Switch';
-import RadioOption from '../common/RadioOption'
+import RadioOption from '@component/common/RadioOption'
 
 
-import SelectItemProp from '../interfaces/SelectItemProp'
+import SelectItemProp from '@component/interfaces/SelectItemProp'
 import AddIcon from '@mui/icons-material/Add';
 
 export default function SelectItem (){
