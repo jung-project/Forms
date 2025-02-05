@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import TextField from './component/froms/TextField'
+import SelectItem from './component/froms/SelectItem'
 import Container from '@mui/material/Container';
 
 export default function App(){
@@ -20,6 +21,7 @@ export default function App(){
   return (
       <Container maxWidth="sm" >
         <TextField />
+        <SelectItem />
       </Container>
   );
 }

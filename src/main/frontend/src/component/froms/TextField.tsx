@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import TextField1 from '@mui/material/TextField';
+import M_TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
@@ -10,14 +10,14 @@ import '@component/css/component.css'
 export default function TextField(){
     return (
         <div>
-            <TextField1
+            <M_TextField
                   fullWidth
                   label="질문"
                   size="small"
                   margin="normal"
               />
 
-            <TextField1
+            <M_TextField
                   fullWidth
                     disabled
                     label="질문에 답변 하세요"
