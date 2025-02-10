@@ -6,17 +6,22 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Switch from '@mui/material/Switch';
-import RadioOption from '@component/common/RadioOption'
+import RadioOption from '@component/common/RadioOption';
 
 
-import SelectItemProp from '@component/interfaces/SelectItemProp'
+import SelectItemProp from '@component/interfaces/SelectItemProp';
 import AddIcon from '@mui/icons-material/Add';
+import {ItemProp} from '@component/interfaces/ItemProp';
 
-export default function SelectItem (){
-    const [options, setOptions] = useState<SelectItemProp[]>([{id: 1, value: "", description: "옵션 1"}
-                                                            , {id: 2, value: "", description: "옵션 2"}]);
+const defaultData = [{id: 1, value: "", description: "옵션 1"}
+                    , {id: 2, value: "", description: "옵션 2"}];
 
-    function createOption(){
+// export default function SelectItem (props: {change: any, itemProps: SelectItemProp[]}){
+export default function SelectItem (props: {change: any, itemProps: ItemProp[]}){
+    const [options, setOptions] = useState<SelectItemProp[]>(props.itemProps.length === 0 ? defaultData : props.itemProps as SelectItemProp[]);
+
+    function createOption(e: React.MouseEvent<HTMLElement>){
+        e.stopPropagation();
         const optionCount: number = options.length + 1;
         const defaultValue = "옵션 " + optionCount.toString();
         setOptions([...options, {id: optionCount, value: "", description: defaultValue}])
@@ -34,6 +39,10 @@ export default function SelectItem (){
         )
     }
 
+    function boxClickHandler(options: SelectItemProp[]){
+        props.change(options);
+    }
+
     function deleteOption(id: Number){
         setOptions(options.filter((option) => option.id !== id));
     }
@@ -47,19 +56,20 @@ export default function SelectItem (){
         );
     });
     return(
-        <Box >
+        <Box onClick={() => boxClickHandler(options)} sx={{bgcolor: '#f5f5f5'}}>
             <M_TextField
                   fullWidth
                   label="질문"
                   size="small"
                   margin="normal"
+                  onClick={(e) => e.stopPropagation()}
             />
             <RadioGroup>
                 <ol>
                     {addOption}
                 </ol>
             </RadioGroup>
-            <Button  startIcon={<AddIcon />} onClick={() => createOption()}>
+            <Button  startIcon={<AddIcon />} onClick={(e) => createOption(e)}>
               옵션 추가
             </Button>
             <Button  >
@@ -71,6 +81,5 @@ export default function SelectItem (){
                 <FormControlLabel control={<Switch />} label="필수" />
             </div>
         </Box>
-
     );
 }

@@ -9,11 +9,13 @@ import DeleteIcon from '@mui/icons-material/DeleteForever';
 export default function RadioOption(props: {option: SelectItemProp, delete: any, change: any}){
     const [idx, setIdx] = useState<Number>(props.option.id);
 
-    function clickHandler(){
+    function clickHandler(e: React.MouseEvent<HTMLElement>){
+        e.stopPropagation();
         props.delete(idx);
     }
 
     function chageHandler(e : React.ChangeEvent<any>){
+        e.stopPropagation();
         const text = e.target.value
         props.change(idx, text);
     }
@@ -25,6 +27,7 @@ export default function RadioOption(props: {option: SelectItemProp, delete: any,
                 defaultValue={props.option.value ? props.option.value : props.option.description}
                 size="small"
                 onChange={chageHandler}
+                onClick={(e) => e.stopPropagation()}
             />
 
             <Button startIcon={<DeleteIcon />} onClick={clickHandler}> </Button>

@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import TextField from './component/froms/edit/TextField'
-import SelectItem from './component/froms/edit/SelectItem'
-import Container from '@mui/material/Container';
+import React from 'react';
+import Main from '@component/froms/Main'
 
 export default function App(){
-    const [data, setData] = useState(null);
 
 //   useEffect(() => {
 //     axios
@@ -19,9 +15,6 @@ export default function App(){
 //   }, []);
 
   return (
-      <Container maxWidth="sm" >
-        <TextField />
-        <SelectItem />
-      </Container>
+      <Main />
   );
 }
