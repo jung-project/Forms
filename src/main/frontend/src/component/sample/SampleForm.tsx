@@ -24,7 +24,7 @@ function FixedContainer() {
           <FormControl fullWidth>
             <Title />
             <FloatingActionButtons buttonClick={handleActionButtonClick}/>
-            {isShowButtonGrid && <ButtonGrid />}
+            {isShowButtonGrid && <ButtonGrid add={() => {}}/>}
           </FormControl>
           </Box>
         </Container>

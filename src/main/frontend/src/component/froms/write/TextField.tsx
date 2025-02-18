@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Box from '@mui/material/Box';
 import M_TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
@@ -7,26 +7,32 @@ import Switch from '@mui/material/Switch';
 import FormLabel from '@mui/material/FormLabel';
 
 import {ItemProp, TextFieldProp} from '@component/interfaces/ItemProp'
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
-export default function TextField(props: {change: any, itemProp: ItemProp}){
+export default function TextField(props: {change: any, itemProp: ItemProp | null}){
     const [item, setItem] = useState<TextFieldProp>(props.itemProp as TextFieldProp);
-    const [hover, setHover] = useState<any>();
+    let boxRef = useRef<any>();
     function boxClickHandler(){
         props.change(item);
     }
 
     function handleMouseOver(){
-        setHover({bgcolor: "#cfe8fc"});
+        boxRef.current.style.setProperty('background-color', '#ebebeb');
     }
     function handleMouseOut(){
-        setHover({bgcolor: ""});
+        boxRef.current.style.setProperty('background-color', '');
     }
 
     return (
-        <Box onClick={() => boxClickHandler()} sx={hover}
+        <Box ref={boxRef} onClick={() => boxClickHandler()} sx={{pl:5}}
               onMouseOver={handleMouseOver}
               onMouseOut={handleMouseOut}>
-            <FormLabel > {item.question} </FormLabel>
+              <Stack direction="row" >
+                <Typography align="center" variant="h6" gutterBottom> {item.order}. </Typography>
+                <Typography align="center" variant="h6" gutterBottom> {item.question} </Typography>
+
+              </Stack>
 
             <M_TextField
                   fullWidth

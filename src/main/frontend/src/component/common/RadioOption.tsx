@@ -3,11 +3,13 @@ import M_TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
 import Button from '@mui/material/Button';
 
-import SelectItemProp from '@component/interfaces/SelectItemProp'
+import {SelectItemProp, CheckBoxProp} from '@component/interfaces/SelectItemProp'
 import DeleteIcon from '@mui/icons-material/DeleteForever';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import {colors as Colors} from '@mui/material';
 
-export default function RadioOption(props: {option: SelectItemProp, delete: any, change: any}){
-    const [idx, setIdx] = useState<Number>(props.option.id);
+export default function RadioOption(props: {option: CheckBoxProp, delete: any, change: any}){
+    const [idx, setIdx] = useState<Number>(props.option.idx);
 
     function clickHandler(e: React.MouseEvent<HTMLElement>){
         e.stopPropagation();
@@ -26,6 +28,7 @@ export default function RadioOption(props: {option: SelectItemProp, delete: any,
             <M_TextField
                 defaultValue={props.option.value ? props.option.value : props.option.description}
                 size="small"
+                sx={{ width: 1/2, bgcolor: Colors.common.white }}
                 onChange={chageHandler}
                 onClick={(e) => e.stopPropagation()}
             />

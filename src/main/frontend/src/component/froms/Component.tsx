@@ -4,26 +4,51 @@ import SelectItem_edit from '@component/froms/edit/SelectItem'
 import SelectItem_Write from '@component/froms/write/SelectItem'
 import Container from '@mui/material/Container';
 
-import SelectItemProp from '@component/interfaces/SelectItemProp'
+import {SelectItemProp} from '@component/interfaces/SelectItemProp'
+import {ItemProp} from '@component/interfaces/ItemProp'
+import TextField_edit from '@component/froms/edit/TextField'
+import TextField_write from '@component/froms/write/TextField'
+import Box from '@mui/material/Box';
+import {ComponentType} from '@component/common/ComponentType';
 
-export default function Component(){
+import FromsTitle_edit from '@component/froms/edit/FromsTitle'
+import FromsTitle_write from '@component/froms/write/FromsTitle'
+
+export default function Component(prop: {type: string, order: number}){
     const isEdit = useRef<boolean>(true);
-    const [component, setComponent] = useState(<SelectItem_edit change={clickHandler} itemProps={[]}/>);
+    const type = useRef<string>(prop.type);
+    const [item, setItem] = useState<ItemProp | null>(null);
 
 
-    function clickHandler(items: SelectItemProp[]){
-        isEdit.current = !isEdit.current
-        if(isEdit.current){
-            setComponent(<SelectItem_edit change={clickHandler} itemProps={items} />)
-        }
-        else{
-            setComponent(<SelectItem_Write change={clickHandler}  itemProps={items} />)
+    function changePropHandler(prop: ItemProp){
+        isEdit.current = !isEdit.current;
+        setItem({...prop});
+    }
+
+    function getElement(){
+        switch(type.current){
+            case ComponentType.selectItem:
+                return (
+                    isEdit.current ? <SelectItem_edit change={changePropHandler} itemProp={item} order={prop.order}/>
+                        :  <SelectItem_Write change={changePropHandler} itemProp={item}/>
+
+                );
+            case ComponentType.textField:
+                return(
+                    isEdit.current ? <TextField_edit change={changePropHandler} itemProp={item} order={prop.order}/>
+                        :   <TextField_write change={changePropHandler} itemProp={item} />
+                );
+            case ComponentType.fromsTitle:
+                return(
+                    isEdit.current ? <FromsTitle_write change={changePropHandler} itemProp={item}/>
+                                            :   <FromsTitle_edit change={changePropHandler} itemProp={item} />
+                );
         }
     }
 
     return (
-        <Container maxWidth="sm">
-            {component}
-        </Container>
+        <Box sx={{ mb: 5 }}>
+            {getElement()}
+        </Box>
     );
 }

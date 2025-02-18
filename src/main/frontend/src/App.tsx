@@ -1,5 +1,6 @@
 import React from 'react';
 import Main from '@component/froms/Main'
+import { CssBaseline } from '@mui/material';
 
 export default function App(){
 
@@ -15,6 +16,6 @@ export default function App(){
 //   }, []);
 
   return (
-      <Main />
+            <Main />
   );
 }
