@@ -31,7 +31,7 @@ function ButtonGrid(props: {add: any}) {
         <Grid size={4}>
           <ColorButton><SwapVertIcon /><InputLabel>순위</InputLabel></ColorButton>
         </Grid>
-        <Grid size={4}>
+        <Grid size={4} onClick={() => clickHandler(ComponentType.likert)}>
           <ColorButton><InputLabel>Likert</InputLabel></ColorButton>
         </Grid>
         <Grid size={4}>
@@ -40,7 +40,6 @@ function ButtonGrid(props: {add: any}) {
         <Grid size={4}>
           <ColorButton><InputLabel>섹션</InputLabel></ColorButton>
         </Grid>
-
       </Grid>
     </Box>
   );

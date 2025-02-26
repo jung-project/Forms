@@ -1,12 +1,20 @@
 import * as React from 'react';
-import {TextField, Typography, colors as Colors} from '@mui/material';
-import styled from 'styled-components';
+import {TextField, Typography, styled, Box, colors as Colors, BoxProps} from '@mui/material';
 
-const TitleWrapper = styled.div`
-    margin: 2%;
-    &:hover {background-color : #EEEEEE}
-    & > * {width : 100%;}
-`;
+// const TitleWrapper = styled.div`
+//     margin: 2%;
+//     &:hover {background-color : #EEEEEE}
+//     & > * {width : 100%;}
+// `;
+
+const TitleBoxWrapper = styled(Box)<BoxProps>(({theme}) => ({
+    '&:hover' : {
+        backgroundColor: Colors.grey[200]
+    },
+    '&>*' : {
+        width: '100%'
+    },
+}));
 
 const Title = () => {
   const [title, setTitle] = React.useState<string>('제목없는 양식');
@@ -22,11 +30,12 @@ const Title = () => {
     setIsEditing(false)
   }
   return (
-      isEditing ? <TitleInputBox title={title} description={description} onSave={handleTitleSave} /> : <TitleBox title={title} description={description} handleTitleClick={handleTitleClick}/>
+      isEditing ? <TitleInputBox title={title} description={description} onSave={handleTitleSave} /> 
+      : <TitleBox title={title} description={description} handleTitleClick={handleTitleClick}/>
   )
 
 }
-function TitleInputBox({title, description, onSave} : {title: string, description: string, onSave:(title:string, description:string) => void}) {
+const TitleInputBox = ({title, description, onSave} : {title: string, description: string, onSave:(title:string, description:string) => void}) => {
   const [tempTitle, setTempTitle] = React.useState<string>(title === '제목없는 양식' ? '' : title);
   const [tempDescription, setTempDescription] = React.useState<string>(description);
  
@@ -36,23 +45,22 @@ function TitleInputBox({title, description, onSave} : {title: string, descriptio
         return;
       }
     }
-
     onSave(tempTitle, tempDescription);
   }
   return (
-    <TitleWrapper onBlur={saveTitle}>
+    <TitleBoxWrapper onBlur={saveTitle}>
       <TextField label="양식 제목" variant="standard" onChange={(e) => setTempTitle(e.target.value)} value={tempTitle} autoFocus></TextField>
       <TextField label="양식 설명" variant="standard" onChange={(e) => setTempDescription(e.target.value)} value={tempDescription}></TextField>
-    </TitleWrapper>
+    </TitleBoxWrapper>
   )
 }
 
-function TitleBox({title, description, handleTitleClick} : {title: string, description: string, handleTitleClick: () => void}) {
+const TitleBox = ({title, description, handleTitleClick} : {title: string, description: string, handleTitleClick: () => void}) => {
   return (
-    <TitleWrapper onClick={handleTitleClick}>
+    <TitleBoxWrapper onClick={handleTitleClick}>
       <Typography variant="h3" >{title}</Typography>
       <Typography variant="h5" >{description}</Typography>
-    </TitleWrapper>
+    </TitleBoxWrapper>
   )
 }
 
