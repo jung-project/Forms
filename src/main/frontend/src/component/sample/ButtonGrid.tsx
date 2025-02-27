@@ -22,7 +22,7 @@ function ButtonGrid(props: {add: any}) {
         <Grid size={4} onClick={() => clickHandler(ComponentType.textField)}>
           <ColorButton><TextFieldsIcon/><InputLabel>텍스트</InputLabel></ColorButton>
         </Grid>
-        <Grid size={4}>
+        <Grid size={4} onClick={() => clickHandler(ComponentType.rating)}>
           <ColorButton><ThumbUpIcon /> <InputLabel>평가</InputLabel></ColorButton>
         </Grid>
         <Grid size={4}>

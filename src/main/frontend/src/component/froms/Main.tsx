@@ -38,7 +38,7 @@ const MainLink = () => {
                 alignItems: "center",
                 height: '70vh'
             }}>
-                <Typography variant='h3'>HOME</Typography>
+                <Typography variant='h3' sx={{mb: 5}}>HOME</Typography>
                 <Stack direction={'row'} spacing={2}>
                     <Link to="/form"><Button variant="contained" >FORM</Button></Link>
                     <Link to="/sample"><Button variant="contained">SAMPLE</Button></Link>

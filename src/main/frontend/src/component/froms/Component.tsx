@@ -17,6 +17,9 @@ import FromsTitle_write from '@component/froms/write/FromsTitle'
 import Likert_write from '@component/froms/write/Likert'
 import Likert_edit from '@component/froms/edit/Likert'
 
+import RatingItem_edit from '@component/froms/edit/RatingItem';
+import RatingItem_write from '@component/froms/write/RatingItem';
+
 export default function Component(prop: { type: string, order: number }) {
     const isEdit = useRef<boolean>(true);
     const type = useRef<string>(prop.type);
@@ -48,9 +51,14 @@ export default function Component(prop: { type: string, order: number }) {
                 );
             case ComponentType.likert:
                 return (
-                    isEdit.current ? <Likert_edit change={changePropHandler} itemProp={item} order={prop.order}/>
-                    : <Likert_write change={changePropHandler} itemProp={item}/>
+                    isEdit.current ? <Likert_edit change={changePropHandler} itemProp={item} order={prop.order} />
+                        : <Likert_write change={changePropHandler} itemProp={item} />
                 );
+            case ComponentType.rating:
+                return (
+                    isEdit.current ? <RatingItem_edit change={changePropHandler} itemProp={item} order={prop.order} />
+                    : <RatingItem_write change={changePropHandler} itemProp={item} />
+                )
 
         }
     }
