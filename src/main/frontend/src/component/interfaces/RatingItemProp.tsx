@@ -2,9 +2,9 @@ import {ItemProp} from '@component/interfaces/ItemProp';
 
 interface RatingItemProp extends ItemProp {
     question:string;
-    ratingValue:number;
-    ratingType:string;
-    ratingCount:number;
+    value:number;
+    type:string;
+    count:number;
 }
 
 const RatingType = {

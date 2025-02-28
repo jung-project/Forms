@@ -5,12 +5,13 @@ import App from './App';
 import App2 from './App2'
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
-
+import CssBaseline from '@mui/material/CssBaseline';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
+    <CssBaseline /> {/** css 규격화 */ }
     <BrowserRouter>
       <App />
     </BrowserRouter>

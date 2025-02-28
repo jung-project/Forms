@@ -5,7 +5,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { ItemProp } from '@component/interfaces/ItemProp';
 import { RatingItemProp, RatingType, RatingTypeToArray } from '@component/interfaces/RatingItemProp';
-
+import '@component/css/fonts.css';
 
 const RatingBoxWrapper = styled(Box)(({ theme }) => ({
     '&': {
@@ -25,7 +25,7 @@ const StyledRating = styled(Rating)({
     },
 });
 
-const getRatingComponent = (type: string, ratingValue: number, ratingCount: number, ratingSize: "small" | "medium" | "large") => {
+const RatingComponent = ({ type, ratingValue, ratingCount, ratingSize }: { type: string, ratingValue: number, ratingCount: number, ratingSize: "small" | "medium" | "large" }) => {
 
     switch (type) {
         case RatingType.STAR:
@@ -42,12 +42,14 @@ const getRatingComponent = (type: string, ratingValue: number, ratingCount: numb
                 icon={<FavoriteIcon fontSize="inherit" />}
                 emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
             />
+        default:
+            return null;
     }
 }
 const RatingItem = (props: { change: any, itemProp: ItemProp | null, order: number }) => {
 
     const [rating, setRating] = useState<RatingItemProp>(props.itemProp === null ?
-        { question: '질문', ratingValue: 0, ratingType: RatingType.STAR, ratingCount: 5, order: props.order }
+        { question: '질문', value: 0, type: RatingType.STAR, count: 5, order: props.order }
         : props.itemProp as RatingItemProp);
 
     const boxClickHandler = (e: any) => {
@@ -60,10 +62,10 @@ const RatingItem = (props: { change: any, itemProp: ItemProp | null, order: numb
 
     return (
         <Box sx={{ pl: 5, bgcolor: '#f5f5f5' }} onClick={(e) => boxClickHandler(e)}>
-            <Box onClick={(e) => preventBubbling(e)} sx={{pt : 2, pb : 2}}>
-                <TextField value={rating?.question} fullWidth onChange={(e) => setRating({...rating, question: e.target.value})}/>
+            <Box onClick={(e) => preventBubbling(e)} sx={{ pt: 2, pb: 2 }}>
+                <TextField className='font-haeder' value={rating?.question} fullWidth onChange={(e) => setRating({ ...rating, question: e.target.value })} />
                 <Stack spacing={2} sx={{ mb: 3, mt: 3 }}>
-                    {getRatingComponent(rating.ratingType, rating.ratingValue, rating.ratingCount, 'large')}
+                    <RatingComponent type={rating.type} ratingValue={rating.value} ratingCount={rating.count} ratingSize="large" />
                 </Stack>
 
                 <FormControl sx={{ mr: 3 }}>
@@ -72,11 +74,16 @@ const RatingItem = (props: { change: any, itemProp: ItemProp | null, order: numb
                         labelId="rating-type-select-label"
                         id="rating-type-select"
                         label="기호"
-                        value={rating.ratingType}
+                        value={rating.type}
                         sx={{ width: '100px' }}
-                        onChange={(e) => setRating({ ...rating, ratingType: e.target.value })}
+                        onChange={(e) => setRating({ ...rating, type: e.target.value })}
                     >
-                        {RatingTypeToArray().map((type, idx) => <MenuItem key={`rating-type-${idx}`} value={type.value}>{getRatingComponent(type.value,0,1,'small')}</MenuItem>)}
+                        {
+                            RatingTypeToArray().map((type, idx) =>
+                                <MenuItem key={`rating-type-${idx}`} value={type.value}>
+                                    <RatingComponent type={type.value} ratingValue={0} ratingCount={1} ratingSize="small" />
+                                </MenuItem>)
+                        }
                     </Select>
                 </FormControl>
                 <FormControl>
@@ -84,13 +91,17 @@ const RatingItem = (props: { change: any, itemProp: ItemProp | null, order: numb
                     <Select
                         labelId="rating-count-select-label"
                         id="rating-count-select"
-                        value={rating.ratingCount}
+                        value={rating.count}
                         label="수준"
-                        sx={{ width: '100px'}}
-                        onChange={(e) => setRating({ ...rating, ratingCount: Number(e.target.value) })}
+                        sx={{ width: '100px' }}
+                        onChange={(e) => setRating({ ...rating, count: Number(e.target.value) })}
                     >
-                        {Array.from([2, 3, 4, 5, 6, 7, 8, 9, 10], (value) => (
+                        {/* {Array.from([2, 3, 4, 5, 6, 7, 8, 9, 10], (value) => (
                             <MenuItem key={`rating-value-${value}`} value={value}>{value}</MenuItem>
+                        ))} */}
+
+                        {Array.from({ length: 9 }, (_, idx) => (
+                            <MenuItem key={`rating-value-${idx + 2}`} value={idx + 2}>{idx + 2}</MenuItem>
                         ))}
                     </Select>
                 </FormControl>

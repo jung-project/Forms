@@ -9,6 +9,7 @@ import InputLabel from '@mui/material/InputLabel';
 
 import {ComponentType} from '@component/common/ComponentType';
 import Component from '@component/froms/Component'
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
 export default function MainContainer(){
     return (

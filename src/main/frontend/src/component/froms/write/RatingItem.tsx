@@ -20,17 +20,17 @@ const getRatingComponent = (type: string, ratingValue: number, ratingCount: numb
 
     switch (type) {
         case RatingType.STAR:
-            return <Rating sx={{p:2}} size='large' disabled name="customized-10" defaultValue={ratingValue} max={ratingCount} />
+            return <Rating sx={{ p: 2 }} size='large' readOnly name="customized-10" defaultValue={ratingValue} max={ratingCount} />
 
         case RatingType.HEART:
             return <StyledRating
-                disabled
+                readOnly
                 name="customized-color"
                 defaultValue={ratingValue}
                 max={ratingCount}
                 size='large'
                 precision={0.5}
-                sx={{p:2}}
+                sx={{ p: 2 }}
                 icon={<FavoriteIcon fontSize="inherit" />}
                 emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
             />
@@ -46,13 +46,13 @@ const RatingItem = (props: { change: any, itemProp: ItemProp | null }) => {
 
     return (
         <Box sx={{ pl: 5, bgcolor: '#f5f5f5' }} onClick={(e) => boxClickHandler(e)}>
-            <Typography sx={{p:2}}>{rating?.question}</Typography>
-                {getRatingComponent(rating.ratingType, rating.ratingValue, rating.ratingCount)}
+            <Typography sx={{ p: 2 }}>{rating?.question}</Typography>
+            {getRatingComponent(rating.type, rating.value, rating.count)}
         </Box>
     )
 }
 
-const RatingItem_write = (props: { change: any, itemProp: ItemProp | null}) => {
+const RatingItem_write = (props: { change: any, itemProp: ItemProp | null }) => {
     return (
         <RatingItem {...props} />
     )
