@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <CssBaseline /> {/** css 규격화 */ }
-    <BrowserRouter>
+    <BrowserRouter basename="/forms">
       <App />
     </BrowserRouter>
     {/**<App2 /> */}

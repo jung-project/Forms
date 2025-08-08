@@ -15,8 +15,8 @@ java {
 }
 
 bootWar {
-	archiveBaseName = 'froms'
-	archiveFileName = 'froms.war'
+	archiveBaseName = 'forms'
+	archiveFileName = 'forms.war'
 }
 
 repositories {
@@ -35,6 +35,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
 }
 
 tasks.named('test') {
@@ -46,7 +48,7 @@ def frontendDir = "$projectDir/src/main/frontend"
 sourceSets {
 	main{
 		resources {
-			srcDirs = ["$projectDir/src/main/resources"]
+			srcDirs = ["$projectDir/src/main/resources", "$projectDir/src/main/webapp"]
 		}
 	}
 }
@@ -64,7 +66,8 @@ task installReact(type : Exec) {
 		commandLine 'npm.cmd', 'install'
 	}
 	else {
-		commandLine "npm", "audit", "fix" commandLine 'npm', 'install'
+		commandLine "npm", "audit", "fix"
+		commandLine 'npm', 'install'
 	}
 }
 
@@ -83,7 +86,8 @@ task buildReact(type: Exec){
 task copyReactBuildFiles(type: Copy){
 	dependsOn "buildReact"
 	from "$frontendDir/build"
-	into "$projectDir/src/main/resources/static"
+//	into "$projectDir/src/main/resources"
+	into "$projectDir/src/main/webapp"
 }
 
 

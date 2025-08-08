@@ -5,7 +5,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { ItemProp } from '@component/interfaces/ItemProp';
 import { RatingItemProp, RatingType, RatingTypeToArray } from '@component/interfaces/RatingItemProp';
-import '@component/css/fonts.css';
+// import '@component/css/fonts.css';
 
 const RatingBoxWrapper = styled(Box)(({ theme }) => ({
     '&': {
