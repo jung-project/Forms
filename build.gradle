@@ -1,7 +1,8 @@
 plugins {
 	id 'java'
 	id 'war'
-	id 'org.springframework.boot' version '3.4.1'
+//	id 'org.springframework.boot' version '3.4.1'
+	id 'org.springframework.boot' version '2.7.8'
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
@@ -10,7 +11,8 @@ version = '0.0.1-SNAPSHOT'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
+//		languageVersion = JavaLanguageVersion.of(17)
+		languageVersion = JavaLanguageVersion.of(11)
 	}
 }
 
@@ -48,7 +50,7 @@ def frontendDir = "$projectDir/src/main/frontend"
 sourceSets {
 	main{
 		resources {
-			srcDirs = ["$projectDir/src/main/resources", "$projectDir/src/main/webapp"]
+			srcDirs = ["$projectDir/src/main/resources"]
 		}
 	}
 }
@@ -86,8 +88,7 @@ task buildReact(type: Exec){
 task copyReactBuildFiles(type: Copy){
 	dependsOn "buildReact"
 	from "$frontendDir/build"
-//	into "$projectDir/src/main/resources"
-	into "$projectDir/src/main/webapp"
+	into "$projectDir/src/main/resources/static"
 }
 
 
